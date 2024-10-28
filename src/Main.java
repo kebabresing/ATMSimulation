@@ -1,9 +1,18 @@
 import java.util.Scanner;
 
+/**
+ * Kelas ini adalah titik masuk (entry point) untuk aplikasi ATM.
+ * Kelas ini mengelola interaksi pengguna dan menu aplikasi.
+ */
 public class Main {
+    /**
+     * Metode utama yang menjalankan aplikasi ATM.
+     *
+     * @pairam args argumen command line (tidak digunakan)
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ATM atm = new ATM(900000); // Saldo awal
+        ATM atm = new ATM(100000); // Saldo awal
 
         System.out.println("Selamat datang di ATM!");
 
@@ -18,12 +27,22 @@ public class Main {
         }
     }
 
+    /**
+     * Mengelola proses login pengguna.
+     *
+     * @param atm objek ATM yang digunakan
+     * @param scanner objek Scanner untuk input pengguna
+     * @return true jika login berhasil, false jika gagal
+     */
     private static boolean loginUser(ATM atm, Scanner scanner) {
         System.out.print("Masukkan PIN Anda: ");
         String pin = scanner.next();
         return atm.login(pin);
     }
 
+    /**
+     * Menampilkan menu utama kepada pengguna.
+     */
     private static void displayMenu() {
         System.out.println("\nMenu:");
         System.out.println("1. Cek Saldo");
@@ -33,6 +52,13 @@ public class Main {
         System.out.print("Pilih opsi (1-4): ");
     }
 
+    /**
+     * Mengelola pilihan yang dipilih oleh pengguna.
+     *
+     * @param atm objek ATM yang digunakan
+     * @param pilihan opsi yang dipilih oleh pengguna
+     * @param scanner objek Scanner untuk input pengguna
+     */
     private static void handleUserChoice(ATM atm, int pilihan, Scanner scanner) {
         switch (pilihan) {
             case 1:

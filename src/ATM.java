@@ -1,14 +1,28 @@
-import java.util.Scanner;
-
+/**
+ * Kelas ini merepresentasikan sebuah ATM yang memungkinkan pengguna untuk
+ * melakukan operasi seperti login, cek saldo, setor tunai, tarik tunai,
+ * dan logout.
+ */
 public class ATM {
     private double saldo;
     private boolean loginStatus;
 
+    /**
+     * Konstruktor untuk menginisialisasi saldo awal pada ATM.
+     *
+     * @param saldoAwal saldo awal yang akan ditetapkan pada ATM
+     */
     public ATM(double saldoAwal) {
         this.saldo = saldoAwal;
         this.loginStatus = false;
     }
 
+    /**
+     * Mengizinkan pengguna untuk login dengan PIN.
+     *
+     * @param pin PIN yang dimasukkan oleh pengguna
+     * @return true jika login berhasil, false jika login gagal
+     */
     public boolean login(String pin) {
         if (pin.equals("1234")) {
             loginStatus = true;
@@ -20,14 +34,18 @@ public class ATM {
         }
     }
 
+    /**
+     * Menampilkan saldo saat ini jika pengguna telah login.
+     */
     public void cekSaldo() {
-        if (isLoggedIn()) {
-            System.out.printf("Saldo Anda: Rp %.2f\n", saldo);
-        } else {
-            System.out.println("Anda harus login terlebih dahulu.");
-        }
+        System.out.printf(isLoggedIn() ? "Saldo Anda: Rp %.2f\n" : "Anda harus login terlebih dahulu.\n", saldo);
     }
 
+    /**
+     * Mengizinkan pengguna untuk menyetor sejumlah uang ke saldo.
+     *
+     * @param jumlah jumlah uang yang akan disetor
+     */
     public void setorTunai(double jumlah) {
         if (isLoggedIn()) {
             if (validasiJumlah(jumlah)) {
@@ -37,6 +55,11 @@ public class ATM {
         }
     }
 
+    /**
+     * Mengizinkan pengguna untuk menarik sejumlah uang dari saldo.
+     *
+     * @param jumlah jumlah uang yang akan ditarik
+     */
     public void tarikTunai(double jumlah) {
         if (isLoggedIn()) {
             if (validasiJumlah(jumlah) && jumlah <= saldo) {
@@ -48,75 +71,35 @@ public class ATM {
         }
     }
 
+    /**
+     * Mengeluarkan pengguna dari sesi login saat ini.
+     */
     public void logout() {
         loginStatus = false;
         System.out.println("Anda telah logout.");
     }
 
+    /**
+     * Memeriksa apakah pengguna saat ini sedang login.
+     *
+     * @return true jika pengguna sedang login, false jika tidak
+     */
     private boolean isLoggedIn() {
         return loginStatus;
     }
 
+    /**
+     * Memvalidasi jumlah yang dimasukkan oleh pengguna.
+     *
+     * @param jumlah jumlah yang akan divalidasi
+     * @return true jika jumlah valid, false jika tidak
+     */
     private boolean validasiJumlah(double jumlah) {
         if (jumlah > 0) {
             return true;
         } else {
             System.out.println("Jumlah tidak valid.");
             return false;
-        }
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        ATM atm = new ATM(100000); // Saldo awal
-
-        System.out.println("Selamat datang di ATM!");
-
-        while (!loginUser(atm, scanner));
-
-        while (true) {
-            displayMenu();
-            int pilihan = scanner.nextInt();
-            handleUserChoice(atm, pilihan, scanner);
-        }
-    }
-
-    private static boolean loginUser(ATM atm, Scanner scanner) {
-        System.out.print("Masukkan PIN Anda: ");
-        String pin = scanner.next();
-        return atm.login(pin);
-    }
-
-    private static void displayMenu() {
-        System.out.println("\nMenu:");
-        System.out.println("1. Cek Saldo");
-        System.out.println("2. Setor Tunai");
-        System.out.println("3. Tarik Tunai");
-        System.out.println("4. Logout");
-        System.out.print("Pilih opsi (1-4): ");
-    }
-
-    private static void handleUserChoice(ATM atm, int pilihan, Scanner scanner) {
-        switch (pilihan) {
-            case 1:
-                atm.cekSaldo();
-                break;
-            case 2:
-                System.out.print("Masukkan jumlah setor: Rp ");
-                double setor = scanner.nextDouble();
-                atm.setorTunai(setor);
-                break;
-            case 3:
-                System.out.print("Masukkan jumlah tarik: Rp ");
-                double tarik = scanner.nextDouble();
-                atm.tarikTunai(tarik);
-                break;
-            case 4:
-                atm.logout();
-                while (!loginUser(atm, scanner)); // Minta login kembali setelah logout
-                break;
-            default:
-                System.out.println("Opsi tidak valid. Silakan coba lagi.");
         }
     }
 }

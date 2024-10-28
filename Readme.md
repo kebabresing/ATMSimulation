@@ -27,12 +27,31 @@ Sebelum menjalankan proyek ini, pastikan Anda memiliki:
 
    ```bash
    git clone https://github.com/kebabresing/ATMSimulation.git
-   
-   ATMSimulation/
-   ├── src/
-   │   ├── Main.java           # Kelas utama untuk menjalankan aplikasi ATM
-   │   ├── ATM.java            # Kelas yang menangani logika ATM (cek saldo, setor, tarik tunai)
-   │   └── User.java           # Kelas untuk informasi pengguna (PIN dan saldo)
-   ├── bin/                    # Direktori keluaran untuk file yang dikompilasi
-   ├── README.md               # Dokumentasi proyek
-   └── .gitignore              # File untuk mengecualikan file yang tidak perlu dalam repository
+
+## Struktur Proyek
+
+Berikut adalah struktur direktori dari proyek ini:
+
+```
+ATMSimulation/
+├── src/
+│   ├── Main.java           # Kelas utama untuk menjalankan aplikasi ATM
+│   ├── ATM.java            # Kelas yang menangani logika ATM (cek saldo, setor, tarik tunai)
+├── bin/                    # Direktori keluaran untuk file yang dikompilasi
+├── README.md               # Dokumentasi proyek
+└── .gitignore              # File untuk mengecualikan file yang tidak perlu dalam repository
+```
+
+## Alur Penggunaan
+
+1. **Login**: Pengguna harus memasukkan PIN yang valid untuk mengakses layanan ATM.
+2. **Cek Saldo**: Setelah login, pengguna dapat memeriksa saldo akun mereka.
+3. **Setor Tunai**: Pengguna dapat menambah saldo dengan menyetor uang tunai.
+4. **Tarik Tunai**: Pengguna dapat menarik uang dari saldo yang tersedia.
+5. **Logout**: Setelah selesai, pengguna dapat logout untuk mengakhiri sesi dengan aman.
+
+## Catatan
+
+- Pastikan PIN yang dimasukkan adalah benar untuk menghindari akses tidak sah.
+- Pastikan jumlah yang disetor atau ditarik adalah valid dan dalam batas saldo yang tersedia.
+- Selalu logout setelah selesai menggunakan layanan untuk keamanan akun Anda.
